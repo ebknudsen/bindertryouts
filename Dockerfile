@@ -1,1 +1,1 @@
-FROM ebknudsen/msre:0.0.9
+FROM ebknudsen/msre-nojpnb-server:0.0.9
