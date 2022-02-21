@@ -29,3 +29,6 @@ else
    echo nuclear data appears to already be installed \(lock file ${name}.done exists\) - skipping.
 fi
 
+#cleanup
+rm $HOME/openmc/nuclear_data/*.xz
+rm $HOME/openmc/nuclear_data/*-install.sh.done
