@@ -3,6 +3,7 @@ RUN pip install --no-cache-dir notebook
 ARG NB_UID=1000
 ARG NB_USER=usr
 #check if uid 1000 is already set, if not set it.
+USER root
 RUN getent passwd ${NB_UID} && adduser --disabled-password \
     --gecos "Default user" \
     --uid ${NB_UID} \
@@ -10,6 +11,5 @@ RUN getent passwd ${NB_UID} && adduser --disabled-password \
 RUN getent passwd $NB_UID && NB_USER=`id -nu ${NB_UID}`
 
 COPY . ${HOME}
-USER root
 RUN chown -R ${NB_UID} ${HOME}
 USER ${NB_USER}
