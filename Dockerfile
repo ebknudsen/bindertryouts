@@ -6,7 +6,7 @@ ARG NB_USER=usr
 RUN getent passwd ${NB_UID} && adduser --disabled-password \
     --gecos "Default user" \
     --uid ${NB_UID} \
-    ${NB_USER} && 
+    ${NB_USER}
 RUN getent passwd $NB_UID && NB_USER=`id -nu ${NB_UID}`
 
 COPY . ${HOME}
