@@ -1,5 +1,5 @@
 FROM ebknudsen/msre-nojpnb-server:0.0.9
-RUN pip install --no-cache-dir notebook
+RUN pip install --no-cache-dir jupyterlab
 ARG NB_UID=1000
 #check if uid 1000 is already set, if not set it.
 USER root
