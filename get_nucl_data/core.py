@@ -19,7 +19,7 @@ class GetData():
 
     def get_nucl_data(self):
         if not pl.Path(self.dirname).exists():
-            pl.Path.mkdir(parents=True)
+            pl.Path(self.dirname).mkdir(parents=True)
         with requests.get(self.url, stream=True) as r:
             r.raise_for_status()
             with open(self.path, 'wb') as f:
