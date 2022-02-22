@@ -27,7 +27,7 @@ def extract_nucl_data(libname='endfb_VIII',dirname=''):
     if p.exists():
         results.sp.run(['tar','-xf','--verbose',p],capture_output=True,text=True)
         s=results.split()
-        print(f'info: extracted {len(s)} .h5-files from {s[0]} to {s[len[-1]}')
+        print(f'info: extracted {len(s)} .h5-files from {s[0]} to {s[-1]}')
 
 def cleanup(libname='endfb_VIII',dirname=''):
     url=data_locations[libname]
