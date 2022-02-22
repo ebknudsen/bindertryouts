@@ -22,7 +22,7 @@ class GetData():
         if not pl.Path(self.dirname).exists():
             pl.Path(self.dirname).mkdir(parents=True)
         with requests.get(self.url, stream=True) as r:
-            print(f'retreiving f{self.libname} nuclear cross section data from {self.url}')
+            print(f'retreiving {self.libname} nuclear cross section data from {self.url}')
             r.raise_for_status()
             tot_len=int(r.headers.get('content-length'))
             with open(self.path, 'wb') as f:
@@ -33,7 +33,7 @@ class GetData():
                     done=float(dl) / tot_len*100.0
                     sys.stdout.write(f"\r{done:4.1f} % done")
                     sys.stdout.flush()
-        return str(dirname / p)
+        return str(self.dirname / p)
 
     def extract_nucl_data(self):
         if self.path.exists():
