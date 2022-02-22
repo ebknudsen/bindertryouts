@@ -37,9 +37,13 @@ class GetData():
 
     def extract_nucl_data(self):
         if self.path.exists():
+            print(f'Info: extracting nuclear cross sections into {self.dirname}')
             results.sp.run(['tar','-xf','--verbose',self.path],capture_output=True,text=True)
             s=results.split()
             print(f'info: extracted {len(s)} .h5-files from {s[0]} to {s[-1]}')
+        #store the base extracted path - for instance to set the OPENMC_CROSS_SECTIONS env. var.
+        self.extract_path=pl.Path(s[0]).parent()
+        return str(self.extract_path)
 
     def cleanup(self):
         self.path.unlink(missing_ok=True)
