@@ -3,7 +3,7 @@ RUN pip install --no-cache-dir notebook
 ARG NB_UID=1000
 #check if uid 1000 is already set, if not set it.
 USER root
-RUN if id -u ${NB_UID}; then adduser --disabled-password \
+RUN if ! id -u ${NB_UID}; then adduser --disabled-password \
     --gecos "Default user" \
     --uid ${NB_UID} \
     ${NB_USER};\
