@@ -2,6 +2,7 @@
 import pathlib as pl
 import requests
 import subprocess as sp
+import sys
 
 nucl_data_urls={
         'endfb_VII':"https://anl.box.com/shared/static/d359skd2w6wrm86om2997a1bxgigc8pu.xz",
@@ -10,7 +11,7 @@ nucl_data_urls={
         }
 
 class GetData():
-    def __init__(self,libname='endfb_VIII', dirname='nuclear_data'):
+    def __init__(self,libname='endfb_VII', dirname='nuclear_data'):
         self.libname=libname
         self.dirname=dirname
         self.url=nucl_data_urls[libname]
@@ -21,10 +22,17 @@ class GetData():
         if not pl.Path(self.dirname).exists():
             pl.Path(self.dirname).mkdir(parents=True)
         with requests.get(self.url, stream=True) as r:
+            print(f'retreiving f{self.libname} nuclear cross section data from {self.url}')
             r.raise_for_status()
+            tot_len=int(r.headers.get('content-length'))
             with open(self.path, 'wb') as f:
+                dl=0
                 for chunk in r.iter_content(chunk_size=8192):
+                    dl += len(chunk)
                     f.write(chunk)
+                    done=float(dl) / tot_len*100.0
+                    sys.stdout.write(f"\r{done:4.1f} % done")
+                    sys.stdout.flush()
         return str(dirname / p)
 
     def extract_nucl_data(self):
