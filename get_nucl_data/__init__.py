@@ -1,1 +1,1 @@
-from .core import get_nucl_data
+from .core import GetData
