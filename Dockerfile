@@ -1,4 +1,4 @@
-FROM ebknudsen/msre-nojpnb-server:0.0.9
+FROM ebknudsen/msre-binder:0.1.0
 RUN pip install --no-cache-dir requests jupyterlab
 ARG NB_UID=1000
 #check if uid 1000 is already set, if not set it.
