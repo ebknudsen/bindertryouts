@@ -35,7 +35,7 @@ class GetData():
                     done=float(dl) / tot_len*100.0
                     sys.stdout.write(f"\r{done:4.1f} % done")
                     sys.stdout.flush()
-        return str(self.dirname / p)
+        return str(self.path)
 
     def extract_nucl_data(self):
         if self.path.exists():
